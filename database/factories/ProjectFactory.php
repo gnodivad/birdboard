@@ -5,6 +5,6 @@ use Faker\Generator as Faker;
 $factory->define(App\Project::class, function (Faker $faker) {
     return [
         'title' => $faker->sentence,
-        'decription' => $faker->paragraph
+        'description' => $faker->paragraph
     ];
 });
