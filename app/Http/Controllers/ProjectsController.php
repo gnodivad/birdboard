@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Project;
-use Illuminate\Http\Request;
 
 class ProjectsController extends Controller
 {
@@ -26,7 +25,7 @@ class ProjectsController extends Controller
             'description' => 'required'
         ]);
 
-        Project::create($attributes);
+        auth()->user()->projects()->create($attributes);
 
         return redirect('/projects');
     }
