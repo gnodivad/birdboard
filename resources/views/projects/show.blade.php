@@ -1,11 +1,13 @@
-@extends('layouts.app')
+@extends ('layouts.app')
 
 @section('content')
-    <header class="flex items-center mb-3 py-4">
+    <header class="flex items-center mb-3 pb-4">
         <div class="flex justify-between items-end w-full">
             <p class="text-grey text-sm font-normal">
-                <a href="/projects" class="text-grey text-sm font-normal no-underline">My Projects</a> / {{ $project->title }}
+                <a href="/projects" class="text-grey text-sm font-normal no-underline hover:underline">My Projects</a>
+                / {{ $project->title }}
             </p>
+
             <a href="/projects/create" class="button">New Project</a>
         </div>
     </header>
@@ -16,7 +18,8 @@
                 <div class="mb-8">
                     <h2 class="text-lg text-grey font-normal mb-3">Tasks</h2>
 
-                    @foreach($project->tasks as $task)
+                    {{-- tasks --}}
+                    @foreach ($project->tasks as $task)
                         <div class="card mb-3">
                             <form method="POST" action="{{ $task->path() }}">
                                 @method('PATCH')
@@ -24,14 +27,14 @@
 
                                 <div class="flex">
                                     <input name="body" value="{{ $task->body }}" class="w-full {{ $task->completed ? 'text-grey' : '' }}">
-                                    <input name="completed" type="checkbox" onChange="this.form.submit()" {{ $task->completed ? 'checked' : ''}}>
+                                    <input name="completed" type="checkbox" onChange="this.form.submit()" {{ $task->completed ? 'checked' : '' }}>
                                 </div>
                             </form>
                         </div>
                     @endforeach
 
                     <div class="card mb-3">
-                        <form action="{{$project->path() . '/tasks'}}" method="POST">
+                        <form action="{{ $project->path() . '/tasks' }}" method="POST">
                             @csrf
 
                             <input placeholder="Add a new task..." class="w-full" name="body">
@@ -42,6 +45,7 @@
                 <div>
                     <h2 class="text-lg text-grey font-normal mb-3">General Notes</h2>
 
+                    {{-- general notes --}}
                     <form method="POST" action="{{ $project->path() }}">
                         @csrf
                         @method('PATCH')
@@ -58,8 +62,8 @@
                 </div>
             </div>
 
-            <div class="lg:w-1/4 px-3">
-                @include('projects.card')
+            <div class="lg:w-1/4 px-3 lg:py-8">
+                @include ('projects.card')
             </div>
         </div>
     </main>
