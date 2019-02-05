@@ -38,7 +38,7 @@ class TriggerActivityTest extends TestCase
         $project->addTask('Some task');
 
         $this->assertCount(2, $project->activity);
-        $this->assertEquals('created_task', $project->activity->last()->description);
+        $this->assertEquals('created_task.blade.php', $project->activity->last()->description);
     }
 
     /** @test */
@@ -53,7 +53,7 @@ class TriggerActivityTest extends TestCase
         ]);
 
         $this->assertCount(3, $project->activity);
-        $this->assertEquals('completed_task', $project->activity->last()->description);
+        $this->assertEquals('completed_task.blade.php', $project->activity->last()->description);
     }
 
     /** @test */

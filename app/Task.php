@@ -23,7 +23,7 @@ class Task extends Model
     {
         $this->update(['completed' => true]);
 
-        $this->project->recordActivity('completed_task');
+        $this->project->recordActivity('completed_task.blade.php');
     }
 
     public function incomplete()
