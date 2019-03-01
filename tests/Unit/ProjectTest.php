@@ -37,5 +37,15 @@ class ProjectTest extends TestCase
         $this->assertTrue($project->tasks->contains($task));
     }
 
+    /** @test */
+    public function it_can_invite_()
+    {
+        $project = factory('App\Project')->create();
+
+        $project->invite($user = factory(\App\User::class)->create());
+
+        $this->assertTrue($project->members->contains($user));
+    }
+
 
 }
