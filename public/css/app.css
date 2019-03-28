@@ -519,7 +519,6 @@ table {
   --page-background-color: #17181e;
   --card-background-color: #1f2027;
   --button-background-color: #59b6f9;
-  --button-text-color: white;
   --header-background-color: #1f2027;
   --text-default-color: #fff;
   --text-muted-color: rgba(255, 255, 255, .5);
@@ -553,7 +552,6 @@ table {
   padding: 1.25rem;
   border-radius: .5rem;
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, .08);
-  color: var(--text-default-color);
 }
 
 body,
@@ -6432,7 +6430,6 @@ button {
   .sm\:lowercase {
     text-transform: lowercase;
   }
-}
 
   .sm\:capitalize {
     text-transform: capitalize;
@@ -11268,7 +11265,6 @@ button {
   .lg\:ml-32 {
     margin-left: 8rem;
   }
-}
 
   .lg\:mt-auto {
     margin-top: auto;
