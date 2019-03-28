@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -42,7 +41,7 @@
 
                     <div>
                         <!-- Right Side Of Navbar -->
-                        <ul class="navbar-nav ml-auto">
+                        <ul class="navbar-nav ml-auto list-reset">
                             <!-- Authentication Links -->
                             @guest
                                 <li class="nav-item">
@@ -66,7 +65,6 @@
                                         <img width="35"
                                              class="rounded-full mr-3"
                                              src="{{ gravatar_url(auth()->user()->email) }}">
-
                                         JeffreyWay
                                     </a>
                                 </li>
@@ -77,10 +75,11 @@
             </div>
         </nav>
 
-        <main class="container mx-auto py-6 section">
-            @yield('content')
-        </main>
+        <div class="section">
+            <main class="container mx-auto py-6">
+                @yield('content')
+            </main>
+        </div>
     </div>
 </body>
-
 </html>
