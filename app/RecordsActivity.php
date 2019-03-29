@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App;
 
 trait RecordsActivity
@@ -52,7 +51,7 @@ trait RecordsActivity
             return static::$recordableEvents;
         }
 
-        return  ['created', 'updated'];
+        return ['created', 'updated'];
     }
 
     /**
@@ -77,6 +76,10 @@ trait RecordsActivity
      */
     public function activity()
     {
+        if (get_class($this) === Project::class) {
+            return $this->hasMany(Activity::class)->latest();
+        }
+
         return $this->morphMany(Activity::class, 'subject')->latest();
     }
 
@@ -89,8 +92,12 @@ trait RecordsActivity
     {
         if ($this->wasChanged()) {
             return [
-                'before' => array_except(array_diff($this->oldAttributes, $this->getAttributes()), 'updated_at'),
-                'after' => array_except($this->getChanges(), 'updated_at')
+                'before' => array_except(
+                    array_diff($this->oldAttributes, $this->getAttributes()), 'updated_at'
+                ),
+                'after' => array_except(
+                    $this->getChanges(), 'updated_at'
+                )
             ];
         }
     }

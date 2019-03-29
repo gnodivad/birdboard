@@ -39,7 +39,7 @@
                        type="checkbox"
                        name="remember"
                        id="remember"
-                    {{ old('remember') ? 'checked' : '' }}>
+                        {{ old('remember') ? 'checked' : '' }}>
 
                 <label class="text-sm" for="remember">
                     Remember Me
@@ -60,4 +60,5 @@
                 @endif
             </div>
         </div>
+    </form>
 @endsection

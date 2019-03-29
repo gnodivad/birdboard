@@ -3,17 +3,15 @@
         Invite a User
     </h3>
 
-    <footer>
-        <form method="POST" action="{{ $project->path() . '/invitations' }}">
-            @csrf
+    <form method="POST" action="{{ $project->path() . '/invitations' }}">
+        @csrf
 
         <div class="mb-3">
             <input type="email" name="email" class="border-muted border rounded w-full py-2 px-3" placeholder="Email address">
         </div>
 
-            <button type="submit" class="button">Invite</button>
-        </form>
+        <button type="submit" class="button">Invite</button>
+    </form>
 
-        @include ('errors', ['bag' => 'invitations'])
-    </footer>
+    @include ('errors', ['bag' => 'invitations'])
 </div>

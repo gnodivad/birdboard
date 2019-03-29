@@ -3,10 +3,10 @@
 namespace Tests\Unit;
 
 use App\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Collection;
-use Tests\TestCase;
 use Facades\Tests\Setup\ProjectFactory;
+use Tests\TestCase;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class UserTest extends TestCase
 {
@@ -21,7 +21,7 @@ class UserTest extends TestCase
     }
 
     /** @test */
-    public function a_user_has_accessible_projects()
+    function a_user_has_accessible_projects()
     {
         $john = $this->signIn();
 
@@ -40,6 +40,4 @@ class UserTest extends TestCase
 
         $this->assertCount(2, $john->accessibleProjects());
     }
-
-
 }

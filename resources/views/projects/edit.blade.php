@@ -7,12 +7,12 @@
         </h1>
 
         <form
-            method="POST"
-            action="{{ $project->path() }}"
+                method="POST"
+                action="{{ $project->path() }}"
         >
             @method('PATCH')
 
-            @include('projects.form', [
+            @include ('projects.form', [
                 'buttonText' => 'Update Project'
             ])
         </form>

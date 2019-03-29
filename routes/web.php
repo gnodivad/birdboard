@@ -15,7 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::group(['middleware' => 'auth'], function() {
+Route::group(['middleware' => 'auth'], function () {
     Route::resource('projects', 'ProjectsController');
 
     Route::post('/projects/{project}/tasks', 'ProjectTasksController@store');

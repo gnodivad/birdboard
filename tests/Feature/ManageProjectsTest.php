@@ -13,15 +13,15 @@ class ManageProjectsTest extends TestCase
     use WithFaker, RefreshDatabase;
 
     /** @test */
-    public function guest_cannot_manage_projects()
+    public function guests_cannot_manage_projects()
     {
         $project = factory('App\Project')->create();
 
-        $this->get('projects')->assertRedirect('login');
-        $this->get('projects/create')->assertRedirect('login');
-        $this->get($project->path() . '/edit')->assertRedirect('login');
-        $this->post('/projects', $project->toArray())->assertRedirect('login');
+        $this->get('/projects')->assertRedirect('login');
+        $this->get('/projects/create')->assertRedirect('login');
+        $this->get($project->path().'/edit')->assertRedirect('login');
         $this->get($project->path())->assertRedirect('login');
+        $this->post('/projects', $project->toArray())->assertRedirect('login');
     }
 
     /** @test */
@@ -31,23 +31,23 @@ class ManageProjectsTest extends TestCase
 
         $this->get('/projects/create')->assertStatus(200);
 
-        $this->followingRedirects()->post('/projects', $attributes = factory(Project::class)->raw())
+        $this->followingRedirects()
+            ->post('/projects', $attributes = factory(Project::class)->raw())
             ->assertSee($attributes['title'])
             ->assertSee($attributes['description'])
             ->assertSee($attributes['notes']);
     }
 
     /** @test */
-    public function a_user_can_sell_all_projects_they_have_been_invited_to_on_their_dashboard()
+    function a_user_can_see_all_projects_they_have_been_invited_to_on_their_dashboard()
     {
         $project = tap(ProjectFactory::create())->invite($this->signIn());
 
         $this->get('/projects')->assertSee($project->title);
     }
 
-
     /** @test */
-    public function unauthorized_users_cannot_delete_project()
+    function unauthorized_users_cannot_delete_projects()
     {
         $project = ProjectFactory::create();
 
@@ -64,7 +64,7 @@ class ManageProjectsTest extends TestCase
     }
 
     /** @test */
-    public function a_user_can_delete_a_project()
+    function a_user_can_delete_a_project()
     {
         $project = ProjectFactory::create();
 
@@ -75,23 +75,22 @@ class ManageProjectsTest extends TestCase
         $this->assertDatabaseMissing('projects', $project->only('id'));
     }
 
-
     /** @test */
-    public function a_user_can_update_a_project()
+    function a_user_can_update_a_project()
     {
         $project = ProjectFactory::create();
 
         $this->actingAs($project->owner)
-            ->patch($project->path(), $attributes = ['title' => 'Changed', 'description' => 'Changed' ,'notes' => 'Changed'])
-            ->assertRedirect($project->path());
+             ->patch($project->path(), $attributes = ['title' => 'Changed', 'description' => 'Changed', 'notes' => 'Changed'])
+             ->assertRedirect($project->path());
 
-        $this->get($project->path() . '/edit')->assertOk();
+        $this->get($project->path().'/edit')->assertOk();
 
         $this->assertDatabaseHas('projects', $attributes);
     }
 
     /** @test */
-    public function a_user_can_update_a_projects_general_notes()
+    function a_user_can_update_a_projects_general_notes()
     {
         $project = ProjectFactory::create();
 
@@ -100,7 +99,6 @@ class ManageProjectsTest extends TestCase
 
         $this->assertDatabaseHas('projects', $attributes);
     }
-
 
     /** @test */
     public function a_user_can_view_their_project()
@@ -117,22 +115,21 @@ class ManageProjectsTest extends TestCase
     public function an_authenticated_user_cannot_view_the_projects_of_others()
     {
         $this->signIn();
+
         $project = factory('App\Project')->create();
 
-        $this->get($project->path())
-            ->assertStatus(403);
+        $this->get($project->path())->assertStatus(403);
     }
 
     /** @test */
     public function an_authenticated_user_cannot_update_the_projects_of_others()
     {
         $this->signIn();
+
         $project = factory('App\Project')->create();
 
-        $this->patch($project->path())
-            ->assertStatus(403);
+        $this->patch($project->path())->assertStatus(403);
     }
-
 
     /** @test */
     public function a_project_requires_a_title()

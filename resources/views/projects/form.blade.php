@@ -5,12 +5,12 @@
 
     <div class="control">
         <input
-            type="text"
-            class="input bg-transparent border border-muted-light rounded p-2 text-xs w-full"
-            name="title"
-            placeholder="My next awesome project"
-            required
-            value="{{ $project->title }}">
+                type="text"
+                class="input bg-transparent border border-muted-light rounded p-2 text-xs w-full"
+                name="title"
+                placeholder="My next awesome project"
+                required
+                value="{{ $project->title }}">
     </div>
 </div>
 
@@ -35,10 +35,4 @@
     </div>
 </div>
 
-@if ($errors->any())
-    <div class="field mt-6">
-        @foreach ($errors->all() as $error)
-            <li class="text-sm text-red">{{ $error }}</li>
-        @endforeach
-    </div>
-@endif
+@include ('errors')
