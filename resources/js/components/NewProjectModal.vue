@@ -54,11 +54,15 @@
               placeholder="Task 1"
               :key="index"
               v-for="(task, index) in form.tasks"
-              v-model="task.value"
+              v-model="task.body"
             />
           </div>
 
-          <button class="inline-flex items-center text-xs" @click="addTask">
+          <button
+            type="button"
+            class="inline-flex items-center text-xs"
+            @click="addTask"
+          >
             <svg class="mr-2" viewbox="0 0 18 18" height="18" width="18">
               <g fill="#000" fill-rule="evenodd" opacity=".307">
                 <path
@@ -74,6 +78,7 @@
 
       <footer class="flex justify-end">
         <button
+          type="button"
           class="button is-outlined mr-4"
           @click="$modal.hide('new-project')"
         >
@@ -92,7 +97,7 @@ export default {
       form: {
         title: "",
         description: "",
-        tasks: [{ value: "" }]
+        tasks: [{ body: "" }]
       },
 
       errors: {}
@@ -101,7 +106,7 @@ export default {
 
   methods: {
     addTask() {
-      this.form.tasks.push({ value: "" });
+      this.form.tasks.push({ body: "" });
     },
 
     async submit() {
