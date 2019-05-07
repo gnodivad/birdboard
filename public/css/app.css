@@ -475,6 +475,12 @@ textarea::-webkit-input-placeholder {
   opacity: .5;
 }
 
+input::-moz-placeholder,
+textarea::-moz-placeholder {
+  color: inherit;
+  opacity: .5;
+}
+
 input:-ms-input-placeholder,
 textarea:-ms-input-placeholder {
   color: inherit;
@@ -561,6 +567,25 @@ table {
   padding: 1.25rem;
   border-radius: .5rem;
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, .08);
+}
+
+.dropdown-toggle > button:focus {
+  overflow: none;
+}
+
+.dropdown-menu-link {
+  display: block;
+  color: var(--text-default-color);
+  text-decoration: none;
+  font-size: .875rem;
+  line-height: 2;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.dropdown-menu-link:hover {
+  text-decoration: underline;
+  background: rgba(0, 0, 0, .1);
 }
 
 body,

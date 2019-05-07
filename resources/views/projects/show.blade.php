@@ -60,7 +60,7 @@
                     <h2 class="text-lg text-muted font-light mb-3">General Notes</h2>
 
                     {{-- general notes --}}
-                    <form method="POST" action="{{ $project->path() }}">
+                    <form method="POST" action="{{ $project ->path() }}">
                         @csrf
                         @method('PATCH')
 
